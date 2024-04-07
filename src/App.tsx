@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { addUser, getUsers } from './features/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
-function App() {
+export default function App() {
+  const dispatch=useDispatch()
+  const users=useSelector(getUsers)
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={()=>dispatch(addUser({fname:'alireza',lname:'akbari',age:20,phone:'0913'}))}>addUser</button>
+      <div>
+        {
+          users?.map((user,index)=>(
+            <div key={index}>{user.fname}</div>
+          ))
+        }
+      </div>
     </div>
-  );
+  )
 }
-
-export default App;
